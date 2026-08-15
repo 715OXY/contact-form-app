@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -13,9 +14,9 @@ return new class extends Migration {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-            $table->string('firstname', 255);
-            $table->string('lastname', 255);
-            $table->tinyInteger('gender')->default(0);
+            $table->string('first_name', 255);
+            $table->string('last_name', 255);
+            $table->tinyInteger('gender')->default(3);
             $table->string('email', 255)->unique();
             $table->string('tel', 11);
             $table->string('address', 255);
