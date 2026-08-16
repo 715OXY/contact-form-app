@@ -14,5 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
+    view('welcome');
+    // return view('welcome');
+});
+
+
+// 仮ルート（Chapter 6で本実装に置き換え）
+Route::middleware('auth')->group(function () {
+
+    // タグの仮ルート（次のセクションで本実装に置き換え）
+    // Route::resource('tags', TagController::class);
+    Route::get('/tags', fn() => 'タグ一覧（準備中）')->name('tags.index');
+
+    // お問い合わせのCRUDルート
+    // Route::resource('contacts', ContactController::class);
+    Route::get('/contacts', fn() => 'お問い合わせ一覧（準備中）')->name('contacts.index');
+
 });
