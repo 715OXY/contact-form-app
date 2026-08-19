@@ -21,8 +21,6 @@ use App\Http\Controllers\TagController;
 Route::get('/', [ContactController::class, 'index'])->name('contacts.index');
 Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
 Route::post('/contacts/confirm', [ContactController::class, 'confirm'])->name('contacts.confirm');
-// Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
-// Route::resource('contacts', ContactController::class)->only(['create', 'store']);
 
 Route::middleware('auth')->group(function () {
 
@@ -32,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/contacts/{contact}', [AdminController::class, 'destroy'])->name('admin.contacts.destroy');
 
     // タグのCRUDルート
-    // Route::resource('tags', TagController::class);
+    Route::resource('/admin/tags', TagController::class);
+    Route::get('/admin/tags/{tag}/edit', [TagController::class, 'edit'])->name('admin.tags.edit');
+    Route::put('/admin/tags/{tag}', [TagController::class, 'update'])->name('admin.tags.update');
+    Route::delete('/admin/tags/{tag}', [TagController::class, 'destroy'])->name('admin.tags.destroy');
 
 });
