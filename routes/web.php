@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TagController;
-use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +26,12 @@ Route::post('/contacts/confirm', [ContactController::class, 'confirm'])->name('c
 
 Route::middleware('auth')->group(function () {
 
-    // タグの仮ルート（次のセクションで本実装に置き換え）
-    // Route::resource('tags', TagController::class);
-    Route::get('/tags', fn() => 'タグ一覧（準備中）')->name('tags.index');
+    // 管理画面のCRUDルート
+    Route::resource('admin', AdminController::class);
+    Route::get('/admin/contacts/{contact}', [AdminController::class, 'show'])->name('admin.contacts.show');
+    Route::delete('/admin/contacts/{contact}', [AdminController::class, 'destroy'])->name('admin.contacts.destroy');
 
-    // お問い合わせのCRUDルート
-    // Route::resource('contacts', ContactController::class);
-    Route::get('/contacts', fn() => 'お問い合わせ一覧（準備中）')->name('contacts.index');
+    // タグのCRUDルート
+    // Route::resource('tags', TagController::class);
 
 });
