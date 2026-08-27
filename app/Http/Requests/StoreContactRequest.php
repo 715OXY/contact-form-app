@@ -27,10 +27,12 @@ class StoreContactRequest extends FormRequest
             'last_name' => 'required|string|max:255',
             'gender' => 'required|integer|in:1,2,3',
             'email' => 'required|email|unique:contacts',
-            'tel' => 'required|string|max:11',
+            'tel' => 'required|regex:/^[0-9]{10,11}$/',
             'address' => 'required|string|max:255',
             'building' => 'nullable|string|max:255',
             'detail' => 'required|string|max:120',
+            'tag_ids' => 'nullable|array',
+            'tag_ids.*' => 'integer|exists:tags,id',
         ];
     }
 
