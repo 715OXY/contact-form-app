@@ -55,13 +55,27 @@ class ContactController extends Controller
     {
         $validated = $request->validated();
 
-        Contact::create($validated);
+        // タグIDを先に退避
+        $tagIds = $validated['tag_ids'] ?? [];
 
-        $category = Category::findOrFail($validated['category_id']);
-        $tag = Tag::all();
+        // contactsテーブルには存在しないので除外
+        unset($validated['tag_ids']);
 
-        return view('contact.thanks', compact('validated', 'category', 'tag'));
+        // Contactを保存
+        $contact = Contact::create($validated);
 
+        // 中間テーブルへ保存
+        $contact->tags()->attach($tagIds);
+
+        return redirect()->route('contacts.thanks');
+    }
+
+    /**
+     * お問い合わせ作成完了ページを表示
+     */
+    public function thanks()
+    {
+        return view('contact.thanks');
     }
 
     /**
