@@ -25,13 +25,13 @@ class ContactController extends Controller
 
         // キーワード検索
         // 姓・名・メールアドレスの部分一致
-        if (!empty($validated['keyword'])) {
+        if (! empty($validated['keyword'])) {
             $keyword = $validated['keyword'];
 
             $query->where(function ($query) use ($keyword) {
-                $query->where('first_name', 'like', '%' . $keyword . '%')
-                    ->orWhere('last_name', 'like', '%' . $keyword . '%')
-                    ->orWhere('email', 'like', '%' . $keyword . '%');
+                $query->where('first_name', 'like', '%'.$keyword.'%')
+                    ->orWhere('last_name', 'like', '%'.$keyword.'%')
+                    ->orWhere('email', 'like', '%'.$keyword.'%');
             });
         }
 
@@ -41,12 +41,12 @@ class ContactController extends Controller
         }
 
         // カテゴリ検索
-        if (!empty($validated['category_id'])) {
+        if (! empty($validated['category_id'])) {
             $query->where('category_id', $validated['category_id']);
         }
 
         // 日付検索
-        if (!empty($validated['date'])) {
+        if (! empty($validated['date'])) {
             $query->whereDate('created_at', $validated['date']);
         }
 
@@ -87,7 +87,7 @@ class ContactController extends Controller
         $contact = Contact::create($validated);
 
         // タグを中間テーブルへ登録
-        if (!empty($tagIds)) {
+        if (! empty($tagIds)) {
             $contact->tags()->attach($tagIds);
         }
 

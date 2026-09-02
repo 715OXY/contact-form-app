@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\ExportContactRequest;
-use App\Models\Contact;
+use App\Http\Requests\StoreContactRequest;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Tag;
 
 class ContactController extends Controller
@@ -87,9 +86,9 @@ class ContactController extends Controller
             $keyword = $validated['keyword'];
 
             $query->where(function ($query) use ($keyword) {
-                $query->where('first_name', 'like', '%' . $keyword . '%')
-                    ->orWhere('last_name', 'like', '%' . $keyword . '%')
-                    ->orWhere('email', 'like', '%' . $keyword . '%');
+                $query->where('first_name', 'like', '%'.$keyword.'%')
+                    ->orWhere('last_name', 'like', '%'.$keyword.'%')
+                    ->orWhere('email', 'like', '%'.$keyword.'%');
             });
         }
 
@@ -109,7 +108,7 @@ class ContactController extends Controller
 
         // 作成日検索
         if ($request->filled('date')) {
-           $query->whereDate('created_at', $validated['date']);
+            $query->whereDate('created_at', $validated['date']);
         }
 
         // 検索実行
@@ -151,7 +150,7 @@ class ContactController extends Controller
 
                 fputcsv($handle, [
                     $contact->id,
-                    $contact->last_name . ' ' . $contact->first_name,
+                    $contact->last_name.' '.$contact->first_name,
                     $gender,
                     $contact->email,
                     $contact->tel,
