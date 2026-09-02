@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Request\AdminRequest;
+use App\Http\Requests\AdminRequest;
 use App\Models\Contact;
 use App\Models\Category;
 use App\Models\Tag;
@@ -13,7 +13,7 @@ class AdminController extends Controller
     /**
      * お問合せ一覧を表示
      */
-    public function index(Request $request)
+    public function index(AdminRequest $request)
     {
         // dd($request->all());
         // お問合せ一覧を取得（カテゴリーとタグのリレーションをロード）

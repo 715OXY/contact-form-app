@@ -4,10 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminRequest extends FormRequest
+class ExportContactRequest extends FormRequest
 {
     /**
-     * リクエストの認可
+     * このリクエストを実行する権限があるか
      */
     public function authorize(): bool
     {

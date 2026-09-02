@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreContactRequest;
+use App\Http\Requests\ExportContactRequest;
 use App\Models\Contact;
 use App\Models\Category;
 use App\Models\Tag;
@@ -41,14 +42,6 @@ class ContactController extends Controller
     }
 
     /**
-     * お問い合わせ作成フォームを表示
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * お問い合わせを新規作成
      */
     public function store(StoreContactRequest $request)
@@ -79,34 +72,100 @@ class ContactController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * CSV形式でダウンロード
      */
-    public function show(string $id)
+    public function export(ExportContactRequest $request)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $validated = $request->validated();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $query = Contact::with('category');
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // キーワード検索
+        // 氏名またはメールアドレスを部分一致で検索
+        if ($request->filled('keyword')) {
+            $keyword = $validated['keyword'];
+
+            $query->where(function ($query) use ($keyword) {
+                $query->where('first_name', 'like', '%' . $keyword . '%')
+                    ->orWhere('last_name', 'like', '%' . $keyword . '%')
+                    ->orWhere('email', 'like', '%' . $keyword . '%');
+            });
+        }
+
+        // 性別検索
+        // 0 は「全て」なので絞り込まない
+        if (
+            isset($validated['gender'])
+            && (int) $validated['gender'] !== 0
+        ) {
+            $query->where('gender', $validated['gender']);
+        }
+
+        // カテゴリー検索
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $validated['category_id']);
+        }
+
+        // 作成日検索
+        if ($request->filled('date')) {
+           $query->whereDate('created_at', $validated['date']);
+        }
+
+        // 検索実行
+        // 新着順で全件取得
+        $contacts = $query
+            ->orderByDesc('created_at')
+            ->get();
+
+        // CSVファイルの生成
+        $fileName = 'contacts.csv';
+
+        return response()->streamDownload(function () use ($contacts) {
+            $handle = fopen('php://output', 'w');
+
+            // UTF-8 BOM
+            fwrite($handle, "\xEF\xBB\xBF");
+
+            // ヘッダー行
+            fputcsv($handle, [
+                'ID',
+                '氏名',
+                '性別',
+                'メール',
+                '電話',
+                '住所',
+                '建物',
+                'カテゴリ',
+                '内容',
+                '作成日時',
+            ]);
+
+            foreach ($contacts as $contact) {
+                $gender = match ((int) $contact->gender) {
+                    1 => '男性',
+                    2 => '女性',
+                    3 => 'その他',
+                    default => '',
+                };
+
+                fputcsv($handle, [
+                    $contact->id,
+                    $contact->last_name . ' ' . $contact->first_name,
+                    $gender,
+                    $contact->email,
+                    $contact->tel,
+                    $contact->address,
+                    $contact->building,
+                    $contact->category?->content ?? '',
+                    $contact->detail,
+                    $contact->created_at?->format('Y-m-d H:i:s'),
+                ]);
+            }
+
+            fclose($handle);
+        }, $fileName, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+        ]);
     }
 }

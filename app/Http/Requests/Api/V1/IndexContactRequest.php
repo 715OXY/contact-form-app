@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminRequest extends FormRequest
+class IndexContactRequest extends FormRequest
 {
     /**
-     * リクエストの認可
+     * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
@@ -15,7 +15,7 @@ class AdminRequest extends FormRequest
     }
 
     /**
-     * バリデーションルール
+     * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
@@ -31,7 +31,7 @@ class AdminRequest extends FormRequest
             'gender' => [
                 'nullable',
                 'integer',
-                'in:0,1,2,3',
+                'in:1,2,3',
             ],
 
             'category_id' => [
@@ -43,6 +43,13 @@ class AdminRequest extends FormRequest
             'date' => [
                 'nullable',
                 'date',
+            ],
+
+            'per_page' => [
+                'nullable',
+                'integer',
+                'min:1',
+                'max:100',
             ],
         ];
     }
