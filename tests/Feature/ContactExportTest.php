@@ -45,7 +45,7 @@ class ContactExportTest extends TestCase
             'first_name' => '太郎',
             'last_name' => '山田',
             'gender' => 1,
-            'email' => uniqid() . '@example.com',
+            'email' => uniqid().'@example.com',
             'tel' => '09012345678',
             'address' => '東京都新宿区西新宿1-1-1',
             'building' => null,

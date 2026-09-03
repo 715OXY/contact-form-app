@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AdminSearchTest extends TestCase
@@ -48,7 +47,7 @@ class AdminSearchTest extends TestCase
             'first_name' => '太郎',
             'last_name' => '山田',
             'gender' => 1,
-            'email' => uniqid() . '@example.com',
+            'email' => uniqid().'@example.com',
             'tel' => '09012345678',
             'address' => '東京都新宿区西新宿1-1-1',
             'building' => null,
@@ -122,7 +121,7 @@ class AdminSearchTest extends TestCase
         ]);
 
         $response = $this->get(
-            '/admin?category_id=' . $this->category2->id
+            '/admin?category_id='.$this->category2->id
         );
 
         $response->assertStatus(200);
@@ -177,7 +176,7 @@ class AdminSearchTest extends TestCase
             'updated_at' => '2026-08-18 10:00:00',
         ]);
 
-        $response = $this->get('/admin?' . http_build_query([
+        $response = $this->get('/admin?'.http_build_query([
             'keyword' => '完全一致対象',
             'gender' => 2,
             'category_id' => $this->category2->id,
@@ -197,8 +196,8 @@ class AdminSearchTest extends TestCase
     {
         for ($i = 1; $i <= 8; $i++) {
             $this->createContact([
-                'first_name' => 'テスト' . $i,
-                'email' => 'test' . $i . '@example.com',
+                'first_name' => 'テスト'.$i,
+                'email' => 'test'.$i.'@example.com',
             ]);
         }
 

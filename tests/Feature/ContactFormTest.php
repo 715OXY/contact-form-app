@@ -102,4 +102,3 @@ class ContactFormTest extends TestCase
         $thanksResponse->assertViewIs('contact.thanks');
     }
 }
-
