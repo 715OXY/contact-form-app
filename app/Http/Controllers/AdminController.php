@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequest;
-use App\Models\Contact;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -25,9 +25,9 @@ class AdminController extends Controller
             $keyword = $request->input('keyword');
 
             $query->where(function ($q) use ($keyword) {
-                $q->where('first_name', 'like', '%' . $keyword . '%')
-                    ->orWhere('last_name', 'like', '%' . $keyword . '%')
-                    ->orWhere('email', 'like', '%' . $keyword . '%');
+                $q->where('first_name', 'like', '%'.$keyword.'%')
+                    ->orWhere('last_name', 'like', '%'.$keyword.'%')
+                    ->orWhere('email', 'like', '%'.$keyword.'%');
             });
         }
 

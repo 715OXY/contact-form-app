@@ -38,7 +38,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         // ログイン試行回数の制限（1分間に5回まで）
         RateLimiter::for('login', function (Request $request) {
-            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())) . '|' . $request->ip());
+            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
             return Limit::perMinute(5)->by($throttleKey);
         });

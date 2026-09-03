@@ -2,10 +2,8 @@
 
 namespace App\Exceptions;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
