@@ -41,7 +41,7 @@ class ApiIndexContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new IndexContactRequest())->rules()
+            (new IndexContactRequest)->rules()
         );
 
         $this->assertTrue($validator->passes());
@@ -54,7 +54,7 @@ class ApiIndexContactRequestTest extends TestCase
     {
         $validator = Validator::make(
             [],
-            (new IndexContactRequest())->rules()
+            (new IndexContactRequest)->rules()
         );
 
         $this->assertTrue($validator->passes());
@@ -68,7 +68,7 @@ class ApiIndexContactRequestTest extends TestCase
         foreach ([0, 4, 99] as $gender) {
             $validator = Validator::make(
                 ['gender' => $gender],
-                (new IndexContactRequest())->rules()
+                (new IndexContactRequest)->rules()
             );
 
             $this->assertTrue(
@@ -90,7 +90,7 @@ class ApiIndexContactRequestTest extends TestCase
     {
         $validator = Validator::make(
             ['category_id' => 999999],
-            (new IndexContactRequest())->rules()
+            (new IndexContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());
@@ -108,7 +108,7 @@ class ApiIndexContactRequestTest extends TestCase
     {
         $validator = Validator::make(
             ['date' => 'not-a-date'],
-            (new IndexContactRequest())->rules()
+            (new IndexContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());
@@ -127,7 +127,7 @@ class ApiIndexContactRequestTest extends TestCase
         foreach ([0, 101] as $perPage) {
             $validator = Validator::make(
                 ['per_page' => $perPage],
-                (new IndexContactRequest())->rules()
+                (new IndexContactRequest)->rules()
             );
 
             $this->assertTrue(
@@ -149,7 +149,7 @@ class ApiIndexContactRequestTest extends TestCase
     {
         $validator = Validator::make(
             ['keyword' => ['山田']],
-            (new IndexContactRequest())->rules()
+            (new IndexContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());

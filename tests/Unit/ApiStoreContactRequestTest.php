@@ -45,7 +45,7 @@ class ApiStoreContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new StoreContactRequest())->rules()
+            (new StoreContactRequest)->rules()
         );
 
         $this->assertTrue($validator->passes());
@@ -62,7 +62,7 @@ class ApiStoreContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new StoreContactRequest())->rules()
+            (new StoreContactRequest)->rules()
         );
 
         $this->assertTrue($validator->passes());
@@ -91,7 +91,7 @@ class ApiStoreContactRequestTest extends TestCase
 
             $validator = Validator::make(
                 $data,
-                (new StoreContactRequest())->rules()
+                (new StoreContactRequest)->rules()
             );
 
             $this->assertTrue(
@@ -116,7 +116,7 @@ class ApiStoreContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new StoreContactRequest())->rules()
+            (new StoreContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());
@@ -137,7 +137,7 @@ class ApiStoreContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new StoreContactRequest())->rules()
+            (new StoreContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());
@@ -158,7 +158,7 @@ class ApiStoreContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new StoreContactRequest())->rules()
+            (new StoreContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());
@@ -179,7 +179,7 @@ class ApiStoreContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new StoreContactRequest())->rules()
+            (new StoreContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());
@@ -203,7 +203,7 @@ class ApiStoreContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new StoreContactRequest())->rules()
+            (new StoreContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());
@@ -224,7 +224,7 @@ class ApiStoreContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new StoreContactRequest())->rules()
+            (new StoreContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());

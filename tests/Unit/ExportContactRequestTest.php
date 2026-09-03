@@ -37,7 +37,7 @@ class ExportContactRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new ExportContactRequest())->rules()
+            (new ExportContactRequest)->rules()
         );
 
         $this->assertTrue($validator->passes());
@@ -50,7 +50,7 @@ class ExportContactRequestTest extends TestCase
     {
         $validator = Validator::make(
             [],
-            (new ExportContactRequest())->rules()
+            (new ExportContactRequest)->rules()
         );
 
         $this->assertTrue($validator->passes());
@@ -65,7 +65,7 @@ class ExportContactRequestTest extends TestCase
             [
                 'gender' => 0,
             ],
-            (new ExportContactRequest())->rules()
+            (new ExportContactRequest)->rules()
         );
 
         $this->assertTrue($validator->passes());
@@ -81,7 +81,7 @@ class ExportContactRequestTest extends TestCase
                 [
                     'gender' => $gender,
                 ],
-                (new ExportContactRequest())->rules()
+                (new ExportContactRequest)->rules()
             );
 
             $this->assertTrue(
@@ -105,7 +105,7 @@ class ExportContactRequestTest extends TestCase
             [
                 'category_id' => 999999,
             ],
-            (new ExportContactRequest())->rules()
+            (new ExportContactRequest)->rules()
         );
 
         $this->assertTrue($validator->fails());

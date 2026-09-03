@@ -9,8 +9,8 @@ use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
-
     use RefreshDatabase;
+
     /**
      * 1つのカテゴリから紐づく複数のお問い合わせを取得できること
      */

@@ -2,14 +2,13 @@
 
 namespace Tests\Unit;
 
-use App\Models\User;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UpdateTagTest extends TestCase
 {
-
     use RefreshDatabase;
 
     protected function setUp(): void
