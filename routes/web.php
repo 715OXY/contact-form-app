@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TagController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,6 @@ use App\Http\Controllers\TagController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 
 // お問い合わせのCRUDルート
 Route::get('/', [ContactController::class, 'index'])->name('contacts.index');

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Contact;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Tag;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -30,10 +30,10 @@ class ContactsTableSeeder extends Seeder
                 'last_name' => $faker->lastName(),
                 'gender' => $faker->numberBetween(1, 3),
                 'email' => $faker->unique()->safeEmail(),
-                'tel' => '0' . $faker->numerify('##########'),
+                'tel' => '0'.$faker->numerify('##########'),
                 'address' => $faker->prefecture()
-                    . $faker->city()
-                    . $faker->streetAddress(),
+                    .$faker->city()
+                    .$faker->streetAddress(),
                 'building' => $faker->optional()->secondaryAddress(),
                 'detail' => $faker->realText(100),
             ]);
