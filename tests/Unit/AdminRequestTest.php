@@ -37,7 +37,7 @@ class AdminRequestTest extends TestCase
 
         $validator = Validator::make(
             $data,
-            (new AdminRequest())->rules()
+            (new AdminRequest)->rules()
         );
 
         $this->assertTrue(
@@ -52,7 +52,7 @@ class AdminRequestTest extends TestCase
     {
         $validator = Validator::make(
             [],
-            (new AdminRequest())->rules()
+            (new AdminRequest)->rules()
         );
 
         $this->assertTrue(
@@ -69,7 +69,7 @@ class AdminRequestTest extends TestCase
             [
                 'gender' => 0,
             ],
-            (new AdminRequest())->rules()
+            (new AdminRequest)->rules()
         );
 
         $this->assertTrue(
@@ -87,7 +87,7 @@ class AdminRequestTest extends TestCase
                 [
                     'gender' => $gender,
                 ],
-                (new AdminRequest())->rules()
+                (new AdminRequest)->rules()
             );
 
             $this->assertTrue(
@@ -107,7 +107,7 @@ class AdminRequestTest extends TestCase
                 [
                     'gender' => $gender,
                 ],
-                (new AdminRequest())->rules()
+                (new AdminRequest)->rules()
             );
 
             $this->assertTrue(
@@ -131,7 +131,7 @@ class AdminRequestTest extends TestCase
             [
                 'category_id' => $this->category->id,
             ],
-            (new AdminRequest())->rules()
+            (new AdminRequest)->rules()
         );
 
         $this->assertTrue(
@@ -148,7 +148,7 @@ class AdminRequestTest extends TestCase
             [
                 'category_id' => 999999,
             ],
-            (new AdminRequest())->rules()
+            (new AdminRequest)->rules()
         );
 
         $this->assertTrue(
@@ -170,7 +170,7 @@ class AdminRequestTest extends TestCase
             [
                 'date' => '2026-09-01',
             ],
-            (new AdminRequest())->rules()
+            (new AdminRequest)->rules()
         );
 
         $this->assertTrue(
@@ -187,7 +187,7 @@ class AdminRequestTest extends TestCase
             [
                 'date' => 'invalid-date',
             ],
-            (new AdminRequest())->rules()
+            (new AdminRequest)->rules()
         );
 
         $this->assertTrue(
@@ -209,7 +209,7 @@ class AdminRequestTest extends TestCase
             [
                 'keyword' => '山田',
             ],
-            (new AdminRequest())->rules()
+            (new AdminRequest)->rules()
         );
 
         $this->assertTrue(
@@ -226,7 +226,7 @@ class AdminRequestTest extends TestCase
             [
                 'keyword' => ['山田'],
             ],
-            (new AdminRequest())->rules()
+            (new AdminRequest)->rules()
         );
 
         $this->assertTrue(
